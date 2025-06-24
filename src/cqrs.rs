@@ -1,3 +1,4 @@
+use std::fmt::Debug;
 use cqrs_es::persist::PersistedEventStore;
 use cqrs_es::{Aggregate, CqrsFramework, Query};
 
@@ -11,7 +12,7 @@ pub fn dynamodb_cqrs<A>(
     services: A::Services,
 ) -> DynamoCqrs<A>
 where
-    A: Aggregate,
+    A: Aggregate + Debug,
 {
     let repo = DynamoEventRepository::new(dynamo_client);
     let store = PersistedEventStore::new_event_store(repo);
@@ -25,7 +26,7 @@ pub fn dynamodb_aggregate_cqrs<A>(
     services: A::Services,
 ) -> DynamoCqrs<A>
 where
-    A: Aggregate,
+    A: Aggregate + Debug,
 {
     let repo = DynamoEventRepository::new(dynamo_client);
     let store = PersistedEventStore::new_aggregate_store(repo);
@@ -40,7 +41,7 @@ pub fn dynamodb_snapshot_cqrs<A>(
     services: A::Services,
 ) -> DynamoCqrs<A>
 where
-    A: Aggregate,
+    A: Aggregate + Debug,
 {
     let repo = DynamoEventRepository::new(dynamo_client);
     let store = PersistedEventStore::new_snapshot_store(repo, snapshot_size);
