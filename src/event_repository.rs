@@ -97,8 +97,16 @@ impl DynamoEventRepository {
         if events.is_empty() {
             return Ok(());
         }
-        let (transactions, _) = Self::build_event_put_transactions(&self.event_table, events);
-        commit_transactions(&self.client, transactions).await?;
+
+        // note: this should be 100, but LocalStack community edition might still support only up to 25.
+        // todo: this should be configurable
+        const MAX_DYNAMO_OPS_PER_TX: usize = 25;
+
+        for chunk in events.chunks(MAX_DYNAMO_OPS_PER_TX) {
+            let (transactions, _) = Self::build_event_put_transactions(&self.event_table, chunk);
+            commit_transactions(&self.client, transactions).await?;
+        }
+
         Ok(())
     }
 

@@ -1,6 +1,6 @@
-use std::fmt::Debug;
 use cqrs_es::persist::PersistedEventStore;
 use cqrs_es::{Aggregate, CqrsFramework, Query};
+use std::fmt::Debug;
 
 use crate::{DynamoCqrs, DynamoEventRepository};
 

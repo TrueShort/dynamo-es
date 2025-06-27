@@ -1,6 +1,6 @@
 [package]
 name = "dynamo-es"
-version = "0.4.11-debug2"
+version = "0.4.12-debug2"
 authors = ["Dave Garred <dave.garred@serverlesstechnology.com>"]
 edition = "2021"
 license = "Apache-2.0"
