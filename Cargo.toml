@@ -1,6 +1,6 @@
 [package]
 name = "dynamo-es"
-version = "0.4.13-fixup"
+version = "0.4.13-fixup2"
 authors = ["Dave Garred <dave.garred@serverlesstechnology.com>"]
 edition = "2021"
 license = "Apache-2.0"
@@ -11,7 +11,7 @@ documentation = "https://docs.rs/dynamo-es"
 readme = "README.md"
 
 [dependencies]
-cqrs-es = "0.4.11"
+cqrs-es = { git = "ssh://git@github.com/TrueShort/cqrs", tag = "0.4.13-debug3" }
 
 async-trait = "0.1"
 aws-sdk-dynamodb = "1.14"
